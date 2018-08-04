@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -11,22 +11,23 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthService } from './services/auth.service';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TakeChallengeComponent } from './pages/take-challenge/take-challenge.component';
-import { RouterModule, Routes } from '../../node_modules/@angular/router';
-
-const appRoutes: Routes = [
-  {path: 'take-challenge', component: TakeChallengeComponent}
-];
+import { RouterModule, Routes } from '@angular/router';
+import { AngularMaterialModule } from './modules/angular-material.module';
+import { RegisterComponent } from './pages/register/register.component';
+import { routes } from './routes';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TakeChallengeComponent
+    TakeChallengeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,10 +35,12 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase, 'DSQuiz'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularMaterialModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],  
+  providers: [AuthService, AuthGuard],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

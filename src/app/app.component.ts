@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DSQuiz';
+
+  constructor(authService: AuthService, router: Router) {
+    if (authService.isLoggedIn) {
+      router.navigate(['take-challenge']);
+    }
+  }
 }

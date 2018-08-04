@@ -1,0 +1,38 @@
+<form [formGroup]="registerForm" (ngSubmit)="signUp()">
+    <mat-form-field appearance="outline" appearance="outline" class="w-100">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="Enter your email" formControlName="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage(registerForm.controls.email)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter your password</mat-label>
+      <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="password.invalid">{{getErrorMessage(registerForm.controls.password)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter your full name</mat-label>
+      <input matInput placeholder="Enter your full name" formControlName="fullName" required>
+      <mat-error *ngIf="fullName.invalid">{{getErrorMessage(registerForm.controls.fullName)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Your Base Location</mat-label>
+      <input matInput placeholder="Your Base Location" formControlName="baseLocation" required>
+      <mat-error *ngIf="baseLocation.invalid">{{getErrorMessage(registerForm.controls.baseLocation)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Name of my EDC/Client/Project</mat-label>
+      <input matInput placeholder="Name of my EDC/Client/Project" formControlName="edcClientProject" required>
+      <mat-error *ngIf="edcClientProject.invalid">{{getErrorMessage(registerForm.controls.edcClientProject)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Are you part of any other Program/Initiatives/Contributions in Ness? Please mention.</mat-label>
+      <input matInput placeholder="Are you part of any other Program/Initiatives/Contributions in Ness? Please mention." formControlName="partOfProgram"
+        required>
+      <mat-error *ngIf="partOfProgram.invalid">{{getErrorMessage(registerForm.controls.partOfProgram)}}</mat-error>
+    </mat-form-field>  
+    <div class="button-row">
+        <button type="submit" mat-raised-button color="primary">Register</button>
+        <button type="button" routerLink="/login" mat-stroked-button color="primary">Login</button>
+      </div>
+  </form>

@@ -1,15 +1,17 @@
-<form name="userform" method="post" #formCtrl="ngForm">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" placeholder="Email" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" placeholder="Password" required>
-  </div>
-  <div class="form-group">
-    <button type="buton" class="btn btn-primary btn-block" style="margin-bottom: 20px" (click)="signInWithEmail()" [disabled]="formCtrl.form.invalid">
-    Login with Email
-    </button>
-  </div>
+<form [formGroup]="loginForm" (ngSubmit)="signIn()">
+  <mat-form-field appearance="outline" appearance="outline" class="w-100">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="Enter your email" formControlName="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage(loginForm.controls.email)}}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Enter your password</mat-label>
+    <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="password.invalid">{{getErrorMessage(loginForm.controls.password)}}</mat-error>
+  </mat-form-field>
+  <div class="button-row">
+  <button type="submit" mat-raised-button color="primary">Login</button>
+  <button type="button" routerLink="/register" mat-stroked-button color="primary">Register</button>
+</div>
 </form>
